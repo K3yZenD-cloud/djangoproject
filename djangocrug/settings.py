@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-nt6b@7%$+xdc$m8gzdll8k4f2gxx293=73hikq+ie*ze7-d5&8')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 # For production, you can be more specific:
 ALLOWED_HOSTS = ['club-de-lectura-elixir.onrender.com', 'your-app-name.onrender.com', 'localhost', '127.0.0.1']
