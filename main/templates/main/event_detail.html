@@ -1,0 +1,174 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ event.title }} - Club de Lectura ELIXIR{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<div class="row mb-4">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'main:events' %}">Encuentros</a></li>
+                <li class="breadcrumb-item active">{{ event.title|truncatechars:50 }}</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!-- Event Details -->
+<div class="row mb-5">
+    <div class="col-lg-8 mx-auto">
+        <div class="card">
+            <div class="card-body p-5">
+                <!-- Event Header -->
+                <div class="text-center mb-4">
+                    <span class="badge bg-wine mb-2">{{ event.get_event_type_display }}</span>
+                    <h1 class="text-primary mb-3">{{ event.title }}</h1>
+                    
+                    <!-- Date and Time -->
+                    <div class="row justify-content-center mb-4">
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body p-3 text-center">
+                                    <i class="fas fa-calendar-alt fa-2x text-primary mb-2"></i>
+                                    <h5 class="mb-1">{{ event.date|date:"l, d F Y" }}</h5>
+                                    <p class="mb-0 text-muted">{{ event.date|date:"H:i" }} hrs</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Info -->
+                <div class="row mb-4">
+                    {% if event.location %}
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-map-marker-alt fa-lg text-wine me-3 mt-1"></i>
+                            <div>
+                                <h6 class="mb-1">Ubicación</h6>
+                                <p class="mb-0">{{ event.location }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if event.online_link %}
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-video fa-lg text-wine me-3 mt-1"></i>
+                            <div>
+                                <h6 class="mb-1">Enlace Online</h6>
+                                <a href="{{ event.online_link }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-external-link-alt me-1"></i>Unirse al Evento
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if event.max_participants %}
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-users fa-lg text-wine me-3 mt-1"></i>
+                            <div>
+                                <h6 class="mb-1">Participantes</h6>
+                                <p class="mb-0">Máximo {{ event.max_participants }} personas</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if event.book %}
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-book fa-lg text-wine me-3 mt-1"></i>
+                            <div>
+                                <h6 class="mb-1">Libro Relacionado</h6>
+                                <p class="mb-0 text-primary">{{ event.book.title }}</p>
+                                <small class="text-muted">{{ event.book.author }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Description -->
+                <div class="mb-4">
+                    <h4 class="text-primary mb-3">Descripción del Evento</h4>
+                    <div class="event-description">
+                        {{ event.description|linebreaks }}
+                    </div>
+                </div>
+
+                <!-- Event Status -->
+                <div class="text-center">
+                    {% if event.is_past %}
+                        <div class="alert alert-secondary">
+                            <i class="fas fa-history me-2"></i>Este evento ya ha finalizado
+                        </div>
+                    {% else %}
+                        <div class="alert alert-success">
+                            <i class="fas fa-calendar-check me-2"></i>Evento próximo - ¡No te lo pierdas!
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Actions -->
+                <div class="text-center mt-4">
+                    <a href="{% url 'main:events' %}" class="btn btn-outline-primary me-2">
+                        <i class="fas fa-arrow-left me-1"></i>Volver a Eventos
+                    </a>
+                    {% if not event.is_past %}
+                        <a href="{% url 'main:join' %}" class="btn btn-primary">
+                            <i class="fas fa-user-plus me-1"></i>Únete para Participar
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Related Book (if exists) -->
+{% if event.book %}
+<div class="row mb-5">
+    <div class="col-lg-8 mx-auto">
+        <div class="card bg-light">
+            <div class="card-body p-4">
+                <h4 class="text-primary mb-3 text-center">
+                    <i class="fas fa-book-open me-2"></i>Sobre el Libro
+                </h4>
+                <div class="row align-items-center">
+                    <div class="col-md-3 text-center mb-3">
+                        {% if event.book.cover_image %}
+                            <img src="{{ event.book.cover_image }}" class="img-fluid rounded" style="max-height: 200px;" alt="{{ event.book.title }}">
+                        {% else %}
+                            <div class="bg-white rounded p-4">
+                                <i class="fas fa-book fa-4x text-muted"></i>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-9">
+                        <h5 class="text-primary">{{ event.book.title }}</h5>
+                        <h6 class="text-wine mb-3">{{ event.book.author }}</h6>
+                        <p class="mb-3">{{ event.book.synopsis|truncatewords:40 }}</p>
+                        <div class="mb-2">
+                            {% for genre in event.book.genres.all %}
+                                <span class="badge bg-accent text-dark me-1">{{ genre.name }}</span>
+                            {% endfor %}
+                        </div>
+                        <a href="{% url 'main:current_reading' %}" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-info-circle me-1"></i>Más Información
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<hr class="section-divider">
+{% endblock %}

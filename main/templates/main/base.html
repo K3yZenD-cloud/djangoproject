@@ -7,74 +7,212 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            background: #f8f9fa;
-            font-family: 'Georgia', 'Times New Roman', serif;
-            color: #2c3e50;
-            min-height: 100vh;
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #2F4F4F;
+            --accent-color: #D2B48C;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --bg-light: #F5F5DC;
+            --wine-color: #722F37;
         }
+        
+        body {
+            background: var(--bg-light);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
         .navbar {
             background: #ffffff !important;
-            border-bottom: 3px solid #2c3e50;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 3px solid var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 1rem 0;
         }
+        
         .navbar-brand {
             font-weight: bold;
-            color: #2c3e50 !important;
-            font-size: 1.4rem;
+            color: var(--primary-color) !important;
+            font-size: 1.6rem;
+            font-family: 'Georgia', serif;
         }
+        
         .nav-link {
-            color: #34495e !important;
+            color: var(--text-dark) !important;
             font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 1rem !important;
+            transition: all 0.3s ease;
         }
+        
         .nav-link:hover {
-            color: #2c3e50 !important;
+            color: var(--primary-color) !important;
+            transform: translateY(-1px);
         }
-        .card {
-            background: #ffffff;
-            border: 1px solid #dee2e6;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             border-radius: 8px;
         }
+        
+        .dropdown-item:hover {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+        }
+        
+        .card {
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
         .card-title {
-            color: #2c3e50;
+            color: var(--primary-color);
             font-weight: bold;
             font-family: 'Georgia', serif;
         }
+        
         .btn-primary {
-            background: #2c3e50;
-            border: 2px solid #2c3e50;
+            background: var(--primary-color);
+            border: 2px solid var(--primary-color);
             font-weight: 600;
-            padding: 10px 20px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
+        
         .btn-primary:hover {
-            background: #34495e;
-            border-color: #34495e;
-            transform: none;
+            background: var(--wine-color);
+            border-color: var(--wine-color);
+            transform: translateY(-1px);
         }
+        
         .btn-outline-primary {
-            color: #2c3e50;
-            border: 2px solid #2c3e50;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            font-weight: 600;
+            border-radius: 8px;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-wine {
+            background: var(--wine-color);
+            border: 2px solid var(--wine-color);
+            color: white;
             font-weight: 600;
         }
-        .btn-outline-primary:hover {
-            background: #2c3e50;
-            border-color: #2c3e50;
+        
+        .btn-wine:hover {
+            background: #5a252a;
+            border-color: #5a252a;
+            color: white;
         }
+        
         .text-primary {
-            color: #2c3e50 !important;
+            color: var(--primary-color) !important;
         }
+        
+        .text-wine {
+            color: var(--wine-color) !important;
+        }
+        
         .bg-light {
-            background-color: #f8f9fa !important;
+            background-color: var(--bg-light) !important;
             border: 1px solid #e9ecef;
         }
+        
+        .bg-accent {
+            background-color: var(--accent-color) !important;
+        }
+        
         h1, h2, h3, h4, h5 {
             font-family: 'Georgia', serif;
-            color: #2c3e50;
+            color: var(--text-dark);
         }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
         .lead {
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-light);
+        }
+        
+        .quote-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--wine-color));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            font-style: italic;
+            font-size: 1.3rem;
+            margin: 2rem 0;
+        }
+        
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--wine-color));
+            border: none;
+            margin: 3rem 0;
+        }
+        
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        /* Dark mode toggle */
+        .dark-mode {
+            background: #1a1a1a;
+            color: #e9ecef;
+        }
+        
+        .dark-mode .navbar {
+            background: #2d2d2d !important;
+            border-bottom-color: var(--accent-color);
+        }
+        
+        .dark-mode .card {
+            background: #2d2d2d;
+            border-color: #404040;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+            
+            .quote-banner {
+                font-size: 1.1rem;
+                padding: 2rem 0;
+            }
         }
     </style>
 </head>
@@ -96,7 +234,48 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'main:about' %}">
-                            <i class="fas fa-users me-1"></i>Nosotros
+                            <i class="fas fa-users me-1"></i>Sobre Nosotros
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="readingsDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-book me-1"></i>Lecturas
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'main:current_reading' %}">
+                                <i class="fas fa-book-open me-2"></i>Lectura Actual
+                            </a></li>
+                            <li><a class="dropdown-item" href="{% url 'main:upcoming_readings' %}">
+                                <i class="fas fa-calendar-alt me-2"></i>Próximas Lecturas
+                            </a></li>
+                            <li><a class="dropdown-item" href="{% url 'main:suggest_book' %}">
+                                <i class="fas fa-lightbulb me-2"></i>Sugerir Libro
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main:events' %}">
+                            <i class="fas fa-calendar me-1"></i>Encuentros
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main:library' %}">
+                            <i class="fas fa-library me-1"></i>Biblioteca
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main:blog' %}">
+                            <i class="fas fa-pen-fancy me-1"></i>Reflexiones
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main:join' %}">
+                            <i class="fas fa-user-plus me-1"></i>Únete
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main:gallery' %}">
+                            <i class="fas fa-images me-1"></i>Galería
                         </a>
                     </li>
                     <li class="nav-item">
@@ -114,6 +293,80 @@
         {% endblock %}
     </main>
 
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-book-open me-2"></i>Club de Lectura ELIXIR</h5>
+                    <p class="mb-3">Conectando mentes a través de la literatura. Un espacio para descubrir, compartir y reflexionar sobre los libros que nos transforman.</p>
+                    <div class="social-links">
+                        <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-goodreads"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'main:current_reading' %}">Lectura Actual</a></li>
+                        <li><a href="{% url 'main:events' %}">Próximos Encuentros</a></li>
+                        <li><a href="{% url 'main:library' %}">Biblioteca Recomendada</a></li>
+                        <li><a href="{% url 'main:join' %}">Únete al Club</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Newsletter</h5>
+                    <p>Recibe nuestras novedades y recomendaciones literarias.</p>
+                    <form class="newsletter-form" method="post" action="{% url 'main:newsletter_subscribe' %}">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" name="email" placeholder="Tu email" required>
+                            <button class="btn btn-outline-light" type="submit">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 Club de Lectura ELIXIR. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <button class="btn btn-sm btn-outline-light" onclick="toggleDarkMode()">
+                        <i class="fas fa-moon me-1"></i>Modo Oscuro
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            
+            const btn = document.querySelector('[onclick="toggleDarkMode()"]');
+            if (isDark) {
+                btn.innerHTML = '<i class="fas fa-sun me-1"></i>Modo Claro';
+            } else {
+                btn.innerHTML = '<i class="fas fa-moon me-1"></i>Modo Oscuro';
+            }
+        }
+        
+        // Load dark mode preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                document.body.classList.add('dark-mode');
+                const btn = document.querySelector('[onclick="toggleDarkMode()"]');
+                btn.innerHTML = '<i class="fas fa-sun me-1"></i>Modo Claro';
+            }
+        });
+    </script>
 </body>
 </html>

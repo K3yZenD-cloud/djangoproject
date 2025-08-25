@@ -1,62 +1,165 @@
 {% extends 'main/base.html' %}
 
-{% block title %}Nosotros - Club de Lectura ELIXIR{% endblock %}
+{% block title %}Sobre Nosotros - Club de Lectura ELIXIR{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-8">
+<!-- Hero Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card bg-accent">
+            <div class="card-body text-center py-5">
+                <h1 class="display-5 text-dark mb-3">
+                    <i class="fas fa-users me-3"></i>Sobre Nosotros
+                </h1>
+                <p class="lead text-dark fs-4">El Club de Lectura ELIXIR</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Historia del Club -->
+<div class="row mb-5">
+    <div class="col-lg-8 mx-auto">
         <div class="card">
             <div class="card-body p-5">
-                <h1 class="card-title text-center mb-4">
-                    <i class="fas fa-users text-primary me-2"></i>Sobre el Club de Lectura ELIXIR
-                </h1>
-                
-                <div class="text-center mb-4">
-                    <p class="lead">
-                        Somos una organización estudiantil de INACAP Concepción-Talcahuano 
-                        dedicada al desarrollo del pensamiento crítico a través del análisis literario riguroso.
-                    </p>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3><i class="fas fa-bullseye text-primary me-2"></i>Misión Académica</h3>
-                        <p>Promover la excelencia en la comprensión lectora y el análisis crítico de textos literarios, 
-                        fomentando el desarrollo intelectual y la formación integral de los estudiantes de INACAP 
-                        a través de metodologías académicas rigurosas.</p>
-                        
-                        <h3><i class="fas fa-microscope text-primary me-2"></i>Metodología</h3>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-primary me-2"></i>Seminarios de análisis textual</li>
-                            <li><i class="fas fa-check text-primary me-2"></i>Selección de obras con criterio académico</li>
-                            <li><i class="fas fa-check text-primary me-2"></i>Debates estructurados y fundamentados</li>
-                            <li><i class="fas fa-check text-primary me-2"></i>Conferencias magistrales especializadas</li>
-                        </ul>
+                <h2 class="text-primary mb-4"><i class="fas fa-book-open me-2"></i>Nuestra Historia</h2>
+                <p class="lead">
+                    El Club de Lectura ELIXIR nació de la pasión compartida por la literatura y el deseo de crear 
+                    un espacio donde las mentes curiosas pudieran encontrarse para explorar mundos literarios.
+                </p>
+                <p>
+                    Fundado por un grupo de entusiastas lectores, nuestro club ha crecido hasta convertirse en 
+                    una comunidad vibrante que celebra la diversidad literaria y fomenta el diálogo intelectual. 
+                    El nombre "ELIXIR" simboliza la transformación que experimentamos a través de la lectura: 
+                    cada libro es una poción mágica que nos cambia, nos enriquece y nos conecta con la humanidad.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Objetivos y Valores -->
+<div class="row mb-5">
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body p-4">
+                <h3 class="text-wine mb-3"><i class="fas fa-bullseye me-2"></i>Nuestros Objetivos</h3>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-star text-primary me-2"></i>Fomentar el amor por la lectura en todas sus formas</li>
+                    <li class="mb-2"><i class="fas fa-star text-primary me-2"></i>Crear un espacio de diálogo y reflexión literaria</li>
+                    <li class="mb-2"><i class="fas fa-star text-primary me-2"></i>Descubrir nuevos autores y géneros literarios</li>
+                    <li class="mb-2"><i class="fas fa-star text-primary me-2"></i>Construir una comunidad inclusiva de lectores</li>
+                    <li class="mb-2"><i class="fas fa-star text-primary me-2"></i>Preservar y compartir el patrimonio literario</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body p-4">
+                <h3 class="text-wine mb-3"><i class="fas fa-heart me-2"></i>Nuestros Valores</h3>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-gem text-primary me-2"></i><strong>Respeto:</strong> Valoramos todas las perspectivas y opiniones</li>
+                    <li class="mb-2"><i class="fas fa-gem text-primary me-2"></i><strong>Inclusión:</strong> Todos son bienvenidos, sin importar su experiencia</li>
+                    <li class="mb-2"><i class="fas fa-gem text-primary me-2"></i><strong>Curiosidad:</strong> Mantenemos una mente abierta a nuevas ideas</li>
+                    <li class="mb-2"><i class="fas fa-gem text-primary me-2"></i><strong>Pasión:</strong> Compartimos el entusiasmo por la literatura</li>
+                    <li class="mb-2"><i class="fas fa-gem text-primary me-2"></i><strong>Crecimiento:</strong> Buscamos el desarrollo personal y colectivo</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonios de Miembros -->
+{% if members %}
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4"><i class="fas fa-quote-left me-2"></i>Testimonios de Nuestros Miembros</h2>
+        <div class="row">
+            {% for member in members|slice:":3" %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center p-4">
+                        {% if member.profile_image %}
+                            <img src="{{ member.profile_image }}" class="rounded-circle mb-3" width="80" height="80" alt="{{ member.name }}">
+                        {% else %}
+                            <div class="rounded-circle bg-primary d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <i class="fas fa-user fa-2x text-white"></i>
+                            </div>
+                        {% endif %}
+                        <h5 class="card-title">{{ member.name }}</h5>
+                        <p class="card-text small">{{ member.bio|truncatewords:20 }}</p>
+                        <div class="mt-2">
+                            {% for genre in member.favorite_genres.all|slice:":2" %}
+                                <span class="badge bg-accent text-dark me-1">{{ genre.name }}</span>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <h3><i class="fas fa-graduation-cap text-primary me-2"></i>Marco Institucional</h3>
-                        <p>Constituido como organización estudiantil oficial de INACAP sede Concepción-Talcahuano, 
-                        nuestro club opera bajo los principios de excelencia académica y formación integral 
-                        que caracterizan a nuestra institución educativa.</p>
-                        
-                        <h3><i class="fas fa-flask text-primary me-2"></i>Fundamento Conceptual</h3>
-                        <p>El término ELIXIR representa la transformación intelectual que se produce mediante 
-                        el estudio sistemático de la literatura, concebida como elemento catalizador del 
-                        desarrollo cognitivo y la formación del pensamiento crítico.</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Qué Hacemos -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4"><i class="fas fa-cogs me-2"></i>¿Qué Hacemos?</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body p-4">
+                        <i class="fas fa-book-reader fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Lecturas Mensuales</h5>
+                        <p class="card-text">Seleccionamos cuidadosamente un libro cada mes, explorando diferentes géneros y autores para enriquecer nuestra perspectiva literaria.</p>
                     </div>
                 </div>
-                
-                <hr class="my-4">
-                
-                <div class="text-center">
-                    <h3><i class="fas fa-users text-primary me-2"></i>Participación Académica</h3>
-                    <p class="lead">
-                        Invitamos a estudiantes comprometidos con el desarrollo intelectual a formar parte 
-                        de esta iniciativa académica que contribuye significativamente a la formación universitaria integral.
-                    </p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body p-4">
+                        <i class="fas fa-comments fa-3x text-wine mb-3"></i>
+                        <h5 class="card-title">Encuentros de Discusión</h5>
+                        <p class="card-text">Organizamos reuniones regulares donde compartimos impresiones, analizamos temas y debatimos sobre los libros que leemos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body p-4">
+                        <i class="fas fa-pen-fancy fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Reflexiones Escritas</h5>
+                        <p class="card-text">Fomentamos la escritura de reseñas y reflexiones personales que enriquecen nuestra comprensión de las obras leídas.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Llamada a la Acción -->
+<div class="row">
+    <div class="col-12">
+        <div class="card bg-gradient" style="background: linear-gradient(135deg, var(--primary-color), var(--wine-color)); color: white;">
+            <div class="card-body text-center py-5">
+                <h2 class="mb-4">¿Te Gustaría Ser Parte de Nuestra Historia?</h2>
+                <p class="lead mb-4">
+                    Únete a nuestra comunidad de lectores apasionados y descubre el poder transformador de la literatura.
+                </p>
+                <div class="mt-4">
+                    <a href="{% url 'main:join' %}" class="btn btn-light btn-lg me-3 px-4 py-2">
+                        <i class="fas fa-user-plus me-2"></i>Únete al Club
+                    </a>
+                    <a href="{% url 'main:contact' %}" class="btn btn-outline-light btn-lg px-4 py-2">
+                        <i class="fas fa-envelope me-2"></i>Contáctanos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="section-divider">
 {% endblock %}

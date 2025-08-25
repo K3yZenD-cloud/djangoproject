@@ -1,0 +1,181 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Próximas Lecturas - Club de Lectura ELIXIR{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card bg-accent">
+            <div class="card-body text-center py-4">
+                <h1 class="display-6 text-dark mb-2">
+                    <i class="fas fa-calendar-alt me-3"></i>Próximas Lecturas
+                </h1>
+                <p class="lead text-dark">Descubre qué libros exploraremos en los próximos meses</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upcoming Books -->
+{% if upcoming_books %}
+<div class="row mb-5">
+    {% for book in upcoming_books %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+            <div class="row g-0 h-100">
+                <div class="col-5">
+                    {% if book.cover_image %}
+                        <img src="{{ book.cover_image }}" class="img-fluid rounded-start h-100" 
+                             style="object-fit: cover;" alt="{{ book.title }}">
+                    {% else %}
+                        <div class="d-flex align-items-center justify-content-center h-100 bg-light rounded-start">
+                            <i class="fas fa-book fa-3x text-muted"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-7">
+                    <div class="card-body p-3 d-flex flex-column h-100">
+                        <div class="mb-2">
+                            {% if book.reading_start_date %}
+                                <span class="badge bg-wine">{{ book.reading_start_date|date:"M Y" }}</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Por Confirmar</span>
+                            {% endif %}
+                        </div>
+                        
+                        <h6 class="card-title text-primary mb-1">{{ book.title|truncatechars:35 }}</h6>
+                        <p class="text-wine small mb-2">{{ book.author }}</p>
+                        
+                        <div class="mb-2">
+                            {% for genre in book.genres.all|slice:":2" %}
+                                <span class="badge bg-accent text-dark me-1 small">{{ genre.name }}</span>
+                            {% endfor %}
+                        </div>
+                        
+                        <p class="card-text small flex-grow-1">{{ book.synopsis|truncatewords:12 }}</p>
+                        
+                        <div class="mt-auto">
+                            {% if book.reading_start_date %}
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-calendar me-1"></i>Inicio: {{ book.reading_start_date|date:"d M Y" }}
+                                </small>
+                            {% endif %}
+                            {% if book.reading_end_date %}
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-flag-checkered me-1"></i>Final: {{ book.reading_end_date|date:"d M Y" }}
+                                </small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Timeline -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4"><i class="fas fa-timeline me-2"></i>Cronograma de Lecturas</h2>
+        <div class="timeline">
+            {% for book in upcoming_books|slice:":6" %}
+            <div class="timeline-item mb-4">
+                <div class="row align-items-center">
+                    <div class="col-md-3 text-center">
+                        <div class="timeline-date">
+                            {% if book.reading_start_date %}
+                                <div class="badge bg-primary p-2">
+                                    {{ book.reading_start_date|date:"M Y" }}
+                                </div>
+                            {% else %}
+                                <div class="badge bg-secondary p-2">
+                                    Por Confirmar
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-body p-3">
+                                <h6 class="card-title text-primary mb-1">{{ book.title }}</h6>
+                                <p class="text-wine small mb-2">{{ book.author }}</p>
+                                <p class="card-text small mb-0">{{ book.synopsis|truncatewords:20 }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% else %}
+<!-- No Upcoming Books -->
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card text-center">
+            <div class="card-body py-5">
+                <i class="fas fa-calendar-times fa-4x text-muted mb-4"></i>
+                <h3 class="text-muted mb-3">No hay lecturas programadas</h3>
+                <p class="lead text-muted mb-4">
+                    Estamos seleccionando cuidadosamente nuestras próximas lecturas. ¡Mantente atento!
+                </p>
+                <div class="mt-4">
+                    <a href="{% url 'main:suggest_book' %}" class="btn btn-primary me-2">
+                        <i class="fas fa-lightbulb me-2"></i>Sugerir un Libro
+                    </a>
+                    <a href="{% url 'main:join' %}" class="btn btn-outline-primary">
+                        <i class="fas fa-user-plus me-2"></i>Únete para Participar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Selection Process -->
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card bg-light">
+            <div class="card-body p-5">
+                <h2 class="text-center text-primary mb-4">
+                    <i class="fas fa-cogs me-2"></i>¿Cómo Seleccionamos Nuestras Lecturas?
+                </h2>
+                <div class="row">
+                    <div class="col-md-3 text-center mb-4">
+                        <i class="fas fa-lightbulb fa-3x text-wine mb-3"></i>
+                        <h5>1. Sugerencias</h5>
+                        <p class="small">Los miembros proponen libros a través de nuestro formulario</p>
+                    </div>
+                    <div class="col-md-3 text-center mb-4">
+                        <i class="fas fa-search fa-3x text-wine mb-3"></i>
+                        <h5>2. Evaluación</h5>
+                        <p class="small">Revisamos calidad literaria, relevancia y potencial de discusión</p>
+                    </div>
+                    <div class="col-md-3 text-center mb-4">
+                        <i class="fas fa-vote-yea fa-3x text-wine mb-3"></i>
+                        <h5>3. Votación</h5>
+                        <p class="small">La comunidad vota por sus opciones favoritas</p>
+                    </div>
+                    <div class="col-md-3 text-center mb-4">
+                        <i class="fas fa-calendar-check fa-3x text-wine mb-3"></i>
+                        <h5>4. Programación</h5>
+                        <p class="small">Organizamos el cronograma de lecturas mensual</p>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="{% url 'main:suggest_book' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-plus me-2"></i>Sugiere tu Próxima Lectura
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="section-divider">
+{% endblock %}

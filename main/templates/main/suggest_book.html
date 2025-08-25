@@ -1,0 +1,226 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Sugerir Libro - Club de Lectura ELIXIR{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card bg-accent">
+            <div class="card-body text-center py-4">
+                <h1 class="display-6 text-dark mb-2">
+                    <i class="fas fa-lightbulb me-3"></i>Sugerir un Libro
+                </h1>
+                <p class="lead text-dark">Comparte tus recomendaciones literarias con la comunidad</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Suggestion Form -->
+<div class="row mb-5">
+    <div class="col-lg-8 mx-auto">
+        <div class="card">
+            <div class="card-body p-5">
+                <h2 class="text-primary mb-4 text-center">
+                    <i class="fas fa-book-medical me-2"></i>Formulario de Sugerencia
+                </h2>
+                
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.title.id_for_label }}" class="form-label">{{ form.title.label }}</label>
+                            {{ form.title }}
+                            {% if form.title.errors %}
+                                <div class="text-danger small">{{ form.title.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.author.id_for_label }}" class="form-label">{{ form.author.label }}</label>
+                            {{ form.author }}
+                            {% if form.author.errors %}
+                                <div class="text-danger small">{{ form.author.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.suggested_by_name.id_for_label }}" class="form-label">{{ form.suggested_by_name.label }}</label>
+                            {{ form.suggested_by_name }}
+                            {% if form.suggested_by_name.errors %}
+                                <div class="text-danger small">{{ form.suggested_by_name.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.suggested_by_email.id_for_label }}" class="form-label">{{ form.suggested_by_email.label }}</label>
+                            {{ form.suggested_by_email }}
+                            {% if form.suggested_by_email.errors %}
+                                <div class="text-danger small">{{ form.suggested_by_email.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.reason.id_for_label }}" class="form-label">{{ form.reason.label }}</label>
+                        {{ form.reason }}
+                        {% if form.reason.errors %}
+                            <div class="text-danger small">{{ form.reason.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg px-5">
+                            <i class="fas fa-paper-plane me-2"></i>Enviar Sugerencia
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Guidelines -->
+<div class="row mb-5">
+    <div class="col-lg-10 mx-auto">
+        <h2 class="text-center mb-4"><i class="fas fa-compass me-2"></i>Guías para Sugerir</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body p-4">
+                        <h5 class="text-wine mb-3"><i class="fas fa-check-circle me-2"></i>Qué Consideramos</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-star text-primary me-2"></i>Calidad literaria y narrativa</li>
+                            <li class="mb-2"><i class="fas fa-star text-primary me-2"></i>Relevancia cultural o histórica</li>
+                            <li class="mb-2"><i class="fas fa-star text-primary me-2"></i>Potencial para generar discusión</li>
+                            <li class="mb-2"><i class="fas fa-star text-primary me-2"></i>Diversidad de géneros y autores</li>
+                            <li class="mb-2"><i class="fas fa-star text-primary me-2"></i>Accesibilidad y disponibilidad</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body p-4">
+                        <h5 class="text-wine mb-3"><i class="fas fa-lightbulb me-2"></i>Consejos para tu Sugerencia</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i>Explica por qué te gustó el libro</li>
+                            <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i>Menciona temas que podrían generar debate</li>
+                            <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i>Considera la longitud del libro</li>
+                            <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i>Incluye información sobre el autor</li>
+                            <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i>Sé específico en tu recomendación</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Popular Genres -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4"><i class="fas fa-tags me-2"></i>Géneros que Exploramos</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="row text-center">
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="p-3 bg-light rounded">
+                            <i class="fas fa-feather-alt fa-2x text-primary mb-2"></i>
+                            <h6>Ficción Literaria</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="p-3 bg-light rounded">
+                            <i class="fas fa-history fa-2x text-wine mb-2"></i>
+                            <h6>Novela Histórica</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="p-3 bg-light rounded">
+                            <i class="fas fa-search fa-2x text-primary mb-2"></i>
+                            <h6>Misterio</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="p-3 bg-light rounded">
+                            <i class="fas fa-rocket fa-2x text-wine mb-2"></i>
+                            <h6>Ciencia Ficción</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="p-3 bg-light rounded">
+                            <i class="fas fa-heart fa-2x text-primary mb-2"></i>
+                            <h6>Romance</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="p-3 bg-light rounded">
+                            <i class="fas fa-dragon fa-2x text-wine mb-2"></i>
+                            <h6>Fantasía</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="p-3 bg-light rounded">
+                            <i class="fas fa-user-tie fa-2x text-primary mb-2"></i>
+                            <h6>Biografía</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="p-3 bg-light rounded">
+                            <i class="fas fa-theater-masks fa-2x text-wine mb-2"></i>
+                            <h6>Drama</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Process Info -->
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card bg-gradient" style="background: linear-gradient(135deg, var(--primary-color), var(--wine-color)); color: white;">
+            <div class="card-body text-center py-5">
+                <h2 class="mb-4"><i class="fas fa-cogs me-2"></i>¿Qué Pasa Después?</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <i class="fas fa-envelope fa-2x mb-2"></i>
+                        <h6>1. Recibimos</h6>
+                        <small>Tu sugerencia llega a nuestro equipo</small>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <i class="fas fa-search fa-2x mb-2"></i>
+                        <h6>2. Evaluamos</h6>
+                        <small>Revisamos la propuesta y su viabilidad</small>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <i class="fas fa-vote-yea fa-2x mb-2"></i>
+                        <h6>3. Decidimos</h6>
+                        <small>La comunidad participa en la selección</small>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <p class="mb-3">¿Tienes más preguntas sobre el proceso?</p>
+                    <a href="{% url 'main:contact' %}" class="btn btn-light btn-lg px-4">
+                        <i class="fas fa-envelope me-2"></i>Contáctanos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="section-divider">
+{% endblock %}

@@ -1,0 +1,206 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Encuentros y Actividades - Club de Lectura ELIXIR{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card bg-accent">
+            <div class="card-body text-center py-4">
+                <h1 class="display-6 text-dark mb-2">
+                    <i class="fas fa-calendar me-3"></i>Encuentros y Actividades
+                </h1>
+                <p class="lead text-dark">Conecta, comparte y descubre en nuestros eventos literarios</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upcoming Events -->
+{% if upcoming_events %}
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4"><i class="fas fa-calendar-plus me-2"></i>Próximos Encuentros</h2>
+        <div class="row">
+            {% for event in upcoming_events %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <span class="badge bg-wine">{{ event.get_event_type_display }}</span>
+                            <div class="text-end">
+                                <div class="text-primary fw-bold">{{ event.date|date:"d" }}</div>
+                                <small class="text-muted">{{ event.date|date:"M Y" }}</small>
+                            </div>
+                        </div>
+                        
+                        <h5 class="card-title">{{ event.title }}</h5>
+                        <p class="card-text">{{ event.description|truncatewords:20 }}</p>
+                        
+                        <div class="mb-3">
+                            <small class="text-muted d-block">
+                                <i class="fas fa-clock me-1"></i>{{ event.date|date:"H:i" }}
+                            </small>
+                            {% if event.location %}
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-map-marker-alt me-1"></i>{{ event.location }}
+                                </small>
+                            {% endif %}
+                            {% if event.online_link %}
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-video me-1"></i>Evento Online
+                                </small>
+                            {% endif %}
+                            {% if event.book %}
+                                <small class="text-primary d-block mt-1">
+                                    <i class="fas fa-book me-1"></i>{{ event.book.title }}
+                                </small>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mt-auto">
+                            <a href="{% url 'main:event_detail' event.pk %}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-info-circle me-1"></i>Ver Detalles
+                            </a>
+                            {% if event.max_participants %}
+                                <small class="text-muted ms-2">
+                                    <i class="fas fa-users me-1"></i>Máx. {{ event.max_participants }}
+                                </small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row mb-5">
+    <div class="col-lg-8 mx-auto">
+        <div class="card text-center">
+            <div class="card-body py-5">
+                <i class="fas fa-calendar-times fa-4x text-muted mb-4"></i>
+                <h3 class="text-muted mb-3">No hay eventos programados</h3>
+                <p class="lead text-muted mb-4">
+                    Estamos organizando nuevos encuentros. ¡Mantente atento a nuestras novedades!
+                </p>
+                <a href="{% url 'main:join' %}" class="btn btn-primary">
+                    <i class="fas fa-user-plus me-2"></i>Únete para Recibir Notificaciones
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Event Types Info -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4"><i class="fas fa-info-circle me-2"></i>Tipos de Encuentros</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body p-4">
+                        <i class="fas fa-comments fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Reuniones del Club</h5>
+                        <p class="card-text small">Encuentros regulares para discutir el libro del mes y compartir impresiones.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body p-4">
+                        <i class="fas fa-book-open fa-3x text-wine mb-3"></i>
+                        <h5 class="card-title">Discusiones de Libro</h5>
+                        <p class="card-text small">Análisis profundo de obras específicas con debates temáticos estructurados.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body p-4">
+                        <i class="fas fa-microphone fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Charlas con Autores</h5>
+                        <p class="card-text small">Encuentros especiales con escritores para conocer su proceso creativo.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body p-4">
+                        <i class="fas fa-tools fa-3x text-wine mb-3"></i>
+                        <h5 class="card-title">Talleres</h5>
+                        <p class="card-text small">Actividades prácticas de escritura creativa y análisis literario.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Past Events -->
+{% if past_events %}
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4"><i class="fas fa-history me-2"></i>Encuentros Anteriores</h2>
+        <div class="row">
+            {% for event in past_events %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 opacity-75">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <span class="badge bg-secondary">{{ event.get_event_type_display }}</span>
+                            <div class="text-end">
+                                <div class="text-muted fw-bold">{{ event.date|date:"d" }}</div>
+                                <small class="text-muted">{{ event.date|date:"M Y" }}</small>
+                            </div>
+                        </div>
+                        
+                        <h6 class="card-title">{{ event.title }}</h6>
+                        <p class="card-text small">{{ event.description|truncatewords:15 }}</p>
+                        
+                        {% if event.book %}
+                            <small class="text-muted d-block">
+                                <i class="fas fa-book me-1"></i>{{ event.book.title }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Calendar Integration -->
+<div class="row mb-5">
+    <div class="col-lg-8 mx-auto">
+        <div class="card bg-light">
+            <div class="card-body text-center p-5">
+                <i class="fas fa-calendar-alt fa-3x text-primary mb-3"></i>
+                <h3 class="text-primary mb-3">¿No Quieres Perderte Ningún Evento?</h3>
+                <p class="lead mb-4">
+                    Mantente al día con todos nuestros encuentros y actividades literarias.
+                </p>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                            <a href="{% url 'main:join' %}" class="btn btn-primary btn-lg">
+                                <i class="fas fa-user-plus me-2"></i>Únete al Club
+                            </a>
+                            <a href="{% url 'main:newsletter_subscribe' %}" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-envelope me-2"></i>Suscríbete al Newsletter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="section-divider">
+{% endblock %}

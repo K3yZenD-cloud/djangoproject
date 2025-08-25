@@ -1,0 +1,158 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Lectura Actual - Club de Lectura ELIXIR{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card bg-accent">
+            <div class="card-body text-center py-4">
+                <h1 class="display-6 text-dark mb-2">
+                    <i class="fas fa-book-open me-3"></i>Lectura Actual
+                </h1>
+                <p class="lead text-dark">El libro que estamos explorando este mes</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if current_book %}
+<!-- Current Book Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    {% if current_book.cover_image %}
+                        <img src="{{ current_book.cover_image }}" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="{{ current_book.title }}">
+                    {% else %}
+                        <div class="d-flex align-items-center justify-content-center h-100 bg-light rounded-start" style="min-height: 400px;">
+                            <i class="fas fa-book fa-5x text-muted"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body p-5">
+                        <h2 class="card-title text-primary mb-2">{{ current_book.title }}</h2>
+                        <h4 class="text-wine mb-4">por {{ current_book.author }}</h4>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                {% if current_book.publication_year %}
+                                    <p><strong>Año de Publicación:</strong> {{ current_book.publication_year }}</p>
+                                {% endif %}
+                                {% if current_book.isbn %}
+                                    <p><strong>ISBN:</strong> {{ current_book.isbn }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                {% if current_book.reading_start_date %}
+                                    <p><strong>Inicio de Lectura:</strong> {{ current_book.reading_start_date|date:"d M Y" }}</p>
+                                {% endif %}
+                                {% if current_book.reading_end_date %}
+                                    <p><strong>Finalización:</strong> {{ current_book.reading_end_date|date:"d M Y" }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            {% for genre in current_book.genres.all %}
+                                <span class="badge bg-accent text-dark me-2 mb-2">{{ genre.name }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <h5 class="text-primary mb-3">Sinopsis</h5>
+                        <p class="card-text mb-4">{{ current_book.synopsis }}</p>
+
+                        {% if current_book.average_rating > 0 %}
+                            <div class="mb-3">
+                                <strong>Calificación Promedio:</strong>
+                                <span class="text-wine">
+                                    {% for i in "12345" %}
+                                        {% if forloop.counter <= current_book.average_rating %}
+                                            <i class="fas fa-star"></i>
+                                        {% else %}
+                                            <i class="far fa-star"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                    ({{ current_book.average_rating }}/5)
+                                </span>
+                            </div>
+                        {% endif %}
+
+                        <div class="mt-4">
+                            <a href="{% url 'main:events' %}" class="btn btn-primary me-2">
+                                <i class="fas fa-calendar me-2"></i>Ver Encuentros
+                            </a>
+                            <a href="{% url 'main:suggest_book' %}" class="btn btn-outline-primary">
+                                <i class="fas fa-lightbulb me-2"></i>Sugerir Próximo Libro
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reviews Section -->
+{% if reviews %}
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4"><i class="fas fa-comments me-2"></i>Reflexiones de Nuestros Miembros</h2>
+        <div class="row">
+            {% for review in reviews %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h6 class="card-title mb-0">{{ review.author_name }}</h6>
+                            <div class="text-wine">
+                                {% for i in "12345" %}
+                                    {% if forloop.counter <= review.rating %}
+                                        <i class="fas fa-star small"></i>
+                                    {% else %}
+                                        <i class="far fa-star small"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <p class="card-text">{{ review.review_text|truncatewords:30 }}</p>
+                        <small class="text-muted">{{ review.created_at|date:"d M Y" }}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% else %}
+<!-- No Current Book -->
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card text-center">
+            <div class="card-body py-5">
+                <i class="fas fa-book fa-4x text-muted mb-4"></i>
+                <h3 class="text-muted mb-3">No hay lectura actual</h3>
+                <p class="lead text-muted mb-4">
+                    Estamos preparando la próxima selección literaria. ¡Mantente atento!
+                </p>
+                <div class="mt-4">
+                    <a href="{% url 'main:upcoming_readings' %}" class="btn btn-primary me-2">
+                        <i class="fas fa-calendar-alt me-2"></i>Ver Próximas Lecturas
+                    </a>
+                    <a href="{% url 'main:suggest_book' %}" class="btn btn-outline-primary">
+                        <i class="fas fa-lightbulb me-2"></i>Sugerir un Libro
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<hr class="section-divider">
+{% endblock %}

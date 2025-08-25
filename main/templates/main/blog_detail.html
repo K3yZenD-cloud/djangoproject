@@ -1,0 +1,131 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ post.title }} - Club de Lectura ELIXIR{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row mb-4">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'main:blog' %}">Reflexiones</a></li>
+                <li class="breadcrumb-item active">{{ post.title|truncatechars:50 }}</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!-- Blog Post Content -->
+<div class="row mb-5">
+    <div class="col-lg-8 mx-auto">
+        <article class="card">
+            <div class="card-body p-5">
+                <!-- Post Header -->
+                <div class="text-center mb-4">
+                    {% if post.is_featured %}
+                        <span class="badge bg-wine mb-2">Reflexión Destacada</span>
+                    {% endif %}
+                    <h1 class="text-primary mb-3">{{ post.title }}</h1>
+                    <div class="text-muted mb-3">
+                        <i class="fas fa-user me-2"></i>{{ post.author_name }}
+                        <span class="mx-2">•</span>
+                        <i class="fas fa-calendar me-2"></i>{{ post.created_at|date:"d F Y" }}
+                        {% if post.updated_at != post.created_at %}
+                            <span class="mx-2">•</span>
+                            <small>Actualizado: {{ post.updated_at|date:"d M Y" }}</small>
+                        {% endif %}
+                    </div>
+                    {% if post.book %}
+                        <div class="mb-3">
+                            <span class="badge bg-accent text-dark">
+                                <i class="fas fa-book me-1"></i>Sobre: {{ post.book.title }} - {{ post.book.author }}
+                            </span>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Featured Quote -->
+                {% if post.featured_quote %}
+                <div class="quote-banner rounded mb-4 p-4">
+                    <blockquote class="mb-0 text-center">
+                        <p class="fs-5 mb-3">"{{ post.featured_quote }}"</p>
+                        {% if post.book %}
+                            <footer class="blockquote-footer text-light">
+                                <cite>{{ post.book.title }} - {{ post.book.author }}</cite>
+                            </footer>
+                        {% endif %}
+                    </blockquote>
+                </div>
+                {% endif %}
+
+                <!-- Post Content -->
+                <div class="post-content">
+                    {{ post.content|linebreaks }}
+                </div>
+
+                <!-- Post Footer -->
+                <hr class="my-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <small class="text-muted">
+                            <i class="fas fa-clock me-1"></i>Publicado el {{ post.created_at|date:"d F Y" }}
+                        </small>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="{% url 'main:blog' %}" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-arrow-left me-1"></i>Volver a Reflexiones
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+
+<!-- Related Posts -->
+{% if related_posts %}
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-4"><i class="fas fa-link me-2"></i>Reflexiones Relacionadas</h2>
+        <div class="row">
+            {% for related_post in related_posts %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="card-title text-primary">{{ related_post.title }}</h6>
+                        <p class="text-muted small mb-2">por {{ related_post.author_name }}</p>
+                        <p class="card-text small">{{ related_post.content|truncatewords:20 }}</p>
+                        <div class="mt-auto">
+                            <a href="{% url 'main:blog_detail' related_post.pk %}" class="btn btn-outline-primary btn-sm">
+                                Leer Más
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Call to Action -->
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card bg-accent">
+            <div class="card-body text-center py-4">
+                <h3 class="text-dark mb-3">¿Te Inspiró Esta Reflexión?</h3>
+                <p class="text-dark mb-4">
+                    Únete a nuestra comunidad y comparte tus propios pensamientos sobre nuestras lecturas.
+                </p>
+                <a href="{% url 'main:join' %}" class="btn btn-wine btn-lg px-4">
+                    <i class="fas fa-user-plus me-2"></i>Únete al Club
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="section-divider">
+{% endblock %}
