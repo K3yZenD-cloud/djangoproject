@@ -8,27 +8,73 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f8f9fa;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #2c3e50;
             min-height: 100vh;
         }
         .navbar {
-            background: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(10px);
+            background: #ffffff !important;
+            border-bottom: 3px solid #2c3e50;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #2c3e50 !important;
+            font-size: 1.4rem;
+        }
+        .nav-link {
+            color: #34495e !important;
+            font-weight: 500;
+        }
+        .nav-link:hover {
+            color: #2c3e50 !important;
         }
         .card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: none;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            border-radius: 8px;
+        }
+        .card-title {
+            color: #2c3e50;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
         }
         .btn-primary {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border: none;
+            background: #2c3e50;
+            border: 2px solid #2c3e50;
+            font-weight: 600;
+            padding: 10px 20px;
         }
         .btn-primary:hover {
-            background: linear-gradient(45deg, #764ba2, #667eea);
-            transform: translateY(-2px);
-            transition: all 0.3s ease;
+            background: #34495e;
+            border-color: #34495e;
+            transform: none;
+        }
+        .btn-outline-primary {
+            color: #2c3e50;
+            border: 2px solid #2c3e50;
+            font-weight: 600;
+        }
+        .btn-outline-primary:hover {
+            background: #2c3e50;
+            border-color: #2c3e50;
+        }
+        .text-primary {
+            color: #2c3e50 !important;
+        }
+        .bg-light {
+            background-color: #f8f9fa !important;
+            border: 1px solid #e9ecef;
+        }
+        h1, h2, h3, h4, h5 {
+            font-family: 'Georgia', serif;
+            color: #2c3e50;
+        }
+        .lead {
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
     </style>
 </head>
