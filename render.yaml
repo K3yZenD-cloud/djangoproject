@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: djangocrug
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn djangocrug.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.7
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False

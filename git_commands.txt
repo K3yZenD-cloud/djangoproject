@@ -1,0 +1,25 @@
+# Comandos para subir el proyecto a GitHub
+# Ejecutar estos comandos en orden después de instalar Git
+
+# 1. Inicializar repositorio Git
+git init
+
+# 2. Configurar usuario (reemplaza con tu información)
+git config user.name "Tu Nombre"
+git config user.email "tu-email@ejemplo.com"
+
+# 3. Agregar todos los archivos
+git add .
+
+# 4. Crear commit inicial
+git commit -m "Initial commit: Django CRUD application ready for Render deployment"
+
+# 5. Agregar repositorio remoto
+git remote add origin https://github.com/K3yZenD-cloud/djangoproject.git
+
+# 6. Subir código a GitHub
+git push -u origin main
+
+# Nota: Si el repositorio ya existe y tiene contenido, usa:
+# git pull origin main --allow-unrelated-histories
+# git push -u origin main
