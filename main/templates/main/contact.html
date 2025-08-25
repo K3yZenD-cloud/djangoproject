@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %}
 
-{% block title %}Contacto - Django CRUD App{% endblock %}
+{% block title %}Contacto - Club de Lectura ELIXIR{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
@@ -8,25 +8,38 @@
         <div class="card">
             <div class="card-body p-5">
                 <h1 class="card-title text-center mb-4">
-                    <i class="fas fa-envelope text-primary me-2"></i>Contáctanos
+                    <i class="fas fa-envelope text-primary me-2"></i>Únete al Club ELIXIR
                 </h1>
                 
+                <div class="text-center mb-4">
+                    <p class="lead">¿Te apasiona la lectura? ¡Ven y forma parte de nuestra comunidad literaria!</p>
+                </div>
+                
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card border-0 bg-light h-100">
                             <div class="card-body text-center">
-                                <i class="fas fa-map-marker-alt fa-3x text-primary mb-3"></i>
-                                <h4>Ubicación</h4>
-                                <p>Concepción, Chile</p>
+                                <i class="fas fa-graduation-cap fa-3x text-primary mb-3"></i>
+                                <h4>Institución</h4>
+                                <p>INACAP<br>Concepción-Talcahuano</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card border-0 bg-light h-100">
                             <div class="card-body text-center">
-                                <i class="fas fa-envelope fa-3x text-success mb-3"></i>
-                                <h4>Email</h4>
-                                <p>s.astroga.512@gmail.com</p>
+                                <i class="fas fa-map-marker-alt fa-3x text-success mb-3"></i>
+                                <h4>Ubicación</h4>
+                                <p>Región del Biobío<br>Chile</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 bg-light h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-envelope fa-3x text-info mb-3"></i>
+                                <h4>Contacto</h4>
+                                <p>club.elixir@inacap.cl</p>
                             </div>
                         </div>
                     </div>
@@ -34,31 +47,36 @@
                 
                 <hr class="my-4">
                 
-                <form class="mt-4">
+                <div class="text-center">
+                    <h3><i class="fas fa-users text-primary me-2"></i>¿Cómo Unirte?</h3>
+                    <p class="mb-4">Participar en el Club de Lectura ELIXIR es muy sencillo:</p>
+                    
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="name" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name" required>
+                            <div class="card border-primary">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-user-plus text-primary me-2"></i>Paso 1</h5>
+                                    <p>Acércate a cualquier miembro del club en el campus de INACAP</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" required>
+                            <div class="card border-success">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-calendar-check text-success me-2"></i>Paso 2</h5>
+                                    <p>Asiste a nuestras reuniones semanales los viernes a las 16:00</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="subject" class="form-label">Asunto</label>
-                        <input type="text" class="form-control" id="subject" required>
+                    
+                    <div class="mt-4">
+                        <p class="lead">
+                            <i class="fas fa-book-heart text-danger me-2"></i>
+                            ¡No necesitas experiencia previa, solo ganas de leer y compartir!
+                        </p>
                     </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Mensaje</label>
-                        <textarea class="form-control" id="message" rows="5" required></textarea>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

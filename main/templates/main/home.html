@@ -1,52 +1,53 @@
 {% extends 'main/base.html' %}
 
-{% block title %}Inicio - Django CRUD App{% endblock %}
+{% block title %}Inicio - Club de Lectura ELIXIR{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-lg-8">
         <div class="card">
             <div class="card-body text-center p-5">
-                <i class="fas fa-rocket fa-4x text-primary mb-4"></i>
-                <h1 class="card-title mb-4">¡Bienvenido a Django CRUD!</h1>
+                <i class="fas fa-book-open fa-4x text-primary mb-4"></i>
+                <h1 class="card-title mb-4">¡Bienvenido al Club de Lectura ELIXIR!</h1>
                 <p class="card-text lead mb-4">
-                    Una aplicación web moderna construida con Django, lista para desplegar en Render.
+                    Un espacio dedicado a la pasión por la lectura en INACAP Concepción-Talcahuano. 
+                    Descubre, comparte y disfruta de grandes historias junto a nosotros.
                 </p>
                 <div class="row mt-5">
                     <div class="col-md-4 mb-3">
                         <div class="card h-100 border-0 shadow-sm">
                             <div class="card-body text-center">
-                                <i class="fas fa-code fa-2x text-primary mb-3"></i>
-                                <h5>Desarrollo Moderno</h5>
-                                <p class="small">Construido con las mejores prácticas de Django</p>
+                                <i class="fas fa-users fa-2x text-primary mb-3"></i>
+                                <h5>Comunidad Lectora</h5>
+                                <p class="small">Conecta con estudiantes apasionados por la literatura</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <div class="card h-100 border-0 shadow-sm">
                             <div class="card-body text-center">
-                                <i class="fas fa-cloud fa-2x text-success mb-3"></i>
-                                <h5>Listo para Render</h5>
-                                <p class="small">Configurado para despliegue automático</p>
+                                <i class="fas fa-calendar-alt fa-2x text-success mb-3"></i>
+                                <h5>Encuentros Regulares</h5>
+                                <p class="small">Reuniones semanales para discutir nuestras lecturas</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <div class="card h-100 border-0 shadow-sm">
                             <div class="card-body text-center">
-                                <i class="fas fa-mobile-alt fa-2x text-info mb-3"></i>
-                                <h5>Responsive</h5>
-                                <p class="small">Diseño adaptable a todos los dispositivos</p>
+                                <i class="fas fa-graduation-cap fa-2x text-info mb-3"></i>
+                                <h5>INACAP</h5>
+                                <p class="small">Orgullosamente parte de la comunidad educativa INACAP</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="mt-4">
                     <a href="{% url 'main:about' %}" class="btn btn-primary btn-lg me-3">
-                        <i class="fas fa-info-circle me-2"></i>Conoce Más
+                        <i class="fas fa-users me-2"></i>Conoce el Club
                     </a>
                     <a href="{% url 'main:contact' %}" class="btn btn-outline-primary btn-lg">
-                        <i class="fas fa-envelope me-2"></i>Contacto
+                        <i class="fas fa-envelope me-2"></i>Únete a Nosotros
                     </a>
                 </div>
             </div>
