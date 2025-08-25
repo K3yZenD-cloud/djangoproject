@@ -9,17 +9,27 @@ from .forms import BookSuggestionForm, MemberRegistrationForm, ContactForm, News
 
 def home(request):
     """Vista principal de la aplicación"""
-    current_book = Book.objects.filter(reading_status='current').first()
-    upcoming_events = Event.objects.filter(date__gte=timezone.now(), is_active=True)[:3]
-    featured_posts = BlogPost.objects.filter(is_published=True, is_featured=True)[:2]
-    featured_quote = BlogPost.objects.filter(is_published=True, featured_quote__isnull=False).exclude(featured_quote='').first()
-    
-    context = {
-        'current_book': current_book,
-        'upcoming_events': upcoming_events,
-        'featured_posts': featured_posts,
-        'featured_quote': featured_quote,
-    }
+    try:
+        current_book = Book.objects.filter(reading_status='current').first()
+        upcoming_events = Event.objects.filter(date__gte=timezone.now(), is_active=True)[:3]
+        featured_posts = BlogPost.objects.filter(is_published=True, is_featured=True)[:2]
+        featured_quote = BlogPost.objects.filter(is_published=True, featured_quote__isnull=False).exclude(featured_quote='').first()
+        
+        context = {
+            'current_book': current_book,
+            'upcoming_events': upcoming_events,
+            'featured_posts': featured_posts,
+            'featured_quote': featured_quote,
+        }
+    except Exception as e:
+        # Si hay error con la base de datos, mostrar página básica
+        context = {
+            'current_book': None,
+            'upcoming_events': [],
+            'featured_posts': [],
+            'featured_quote': None,
+            'db_error': str(e)
+        }
     return render(request, 'main/home.html', context)
 
 def about(request):
