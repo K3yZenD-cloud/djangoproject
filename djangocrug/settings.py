@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-nt6b@7%$+xdc$m8gzdll8
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 # For production, you can be more specific:
-ALLOWED_HOSTS = ['your-app-name.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['club-de-lectura-elixir.onrender.com', 'your-app-name.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
