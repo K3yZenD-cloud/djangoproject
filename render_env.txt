@@ -1,0 +1,18 @@
+# Variables de entorno para configurar en Render
+# Copia estas variables en el dashboard de Render -> Environment
+
+# Base de datos Supabase
+DATABASE_URL=postgresql://postgres:[PASSWORD]@wwjgyzwsemtaawpupufr.supabase.co:5432/postgres
+
+# Django
+SECRET_KEY=django-insecure-nt6b@7%$+xdc$m8gzdll8k4f2gxx293=73hikq+ie*ze7-d5&8
+DEBUG=False
+USE_SQLITE=False
+
+# Supabase
+SUPABASE_URL=https://wwjgyzwsemtaawpupufr.supabase.co
+SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind3amd5endzZW10YWF3cHVwdWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYxNTkwOTMsImV4cCI6MjA3MTczNTA5M30.ewpYwBbgAUAVQjm6ESYxVURN881uJqmuLyau-ETrgZI
+
+# IMPORTANTE: Reemplaza [PASSWORD] con la contraseña real de tu base de datos Supabase
+# La URL completa debe ser algo como:
+# postgresql://postgres:tu_password_aqui@wwjgyzwsemtaawpupufr.supabase.co:5432/postgres

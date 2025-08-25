@@ -77,12 +77,37 @@ WSGI_APPLICATION = 'djangocrug.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Database Configuration
+# Use PostgreSQL for production (Render) and SQLite for local development
+if config('DATABASE_URL', default=None):
+    # Production: Use Supabase PostgreSQL
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.parse(config('DATABASE_URL'))
     }
-}
+elif not config('USE_SQLITE', default=True, cast=bool):
+    # Supabase PostgreSQL Database Configuration
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DB_NAME', default='postgres'),
+            'USER': config('DB_USER', default='postgres'),
+            'PASSWORD': config('DB_PASSWORD', default=''),
+            'HOST': config('DB_HOST', default='wwjgyzwsemtaawpupufr.supabase.co'),
+            'PORT': config('DB_PORT', default='5432'),
+            'OPTIONS': {
+                'sslmode': 'require',
+            },
+        }
+    }
+else:
+    # Local development: Use SQLite
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
